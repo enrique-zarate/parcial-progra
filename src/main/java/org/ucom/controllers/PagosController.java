@@ -9,19 +9,19 @@ import org.ucom.entities.Sistema.Producto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jakarta.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
+// import jakarta.ws.rs.Consumes;
+// import javax.ws.rs.core.MediaType;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import javax.ws.*;
+// import javax.ws.*;
 import jakarta.ws.rs.core.Response;
 
 @Path("/tienda/caja/{documentoCliente}/{documentoUsuario}")
 public class PagosController {
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    // @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarPago(List<Producto> productos, @PathParam("documentoCliente") String docCliente,
             @PathParam("documentoUsuario") String docUsuario) {
         // lógica para registrar el pago
@@ -38,7 +38,6 @@ public class PagosController {
         }
         pago.setTotal(total);
 
-        // Aquí podrías escribir el objeto Pago a un archivo JSON
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             objectMapper.writeValue(new File("pagos.json"), pago);
