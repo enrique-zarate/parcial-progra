@@ -30,6 +30,10 @@
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-reactive</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
@@ -55,11 +59,11 @@
     <artifactId>jackson-databind</artifactId>
     <version>2.9.8</version>
   </dependency>
-  <dependency>
+  <!-- <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>javax.ws.rs-api</artifactId>
       <version>2.1.1</version>
-  </dependency>
+  </dependency> -->
   </dependencies>
   <build>
     <plugins>
