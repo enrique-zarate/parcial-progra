@@ -122,7 +122,7 @@ public class MetodoPago implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.fpj.crm.entity.gen.taller.MetodoPago[ metodoPagoId=" + metodoPagoId + " ]";
+        return "org.ucom.entities.MetodoPago[ metodoPagoId=" + metodoPagoId + " ]";
     }
 
 }

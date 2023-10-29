@@ -146,7 +146,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.fpj.crm.entity.gen.taller.Venta[ ventaId=" + ventaId + " ]";
+        return "org.ucom.entities.Venta[ ventaId=" + ventaId + " ]";
     }
 
 }

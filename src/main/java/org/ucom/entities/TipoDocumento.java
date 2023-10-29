@@ -123,7 +123,7 @@ public class TipoDocumento implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.fpj.crm.entity.gen.taller.TipoDocumento[ tipoDocumentoId=" + tipoDocumentoId + " ]";
+        return "org.ucom.entities.TipoDocumento[ tipoDocumentoId=" + tipoDocumentoId + " ]";
     }
 
 }

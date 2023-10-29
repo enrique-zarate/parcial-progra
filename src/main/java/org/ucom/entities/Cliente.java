@@ -159,7 +159,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.fpj.crm.entity.gen.taller.Cliente[ clienteId=" + clienteId + " ]";
+        return "org.ucom.entities.Cliente[ clienteId=" + clienteId + " ]";
     }
 
 }
