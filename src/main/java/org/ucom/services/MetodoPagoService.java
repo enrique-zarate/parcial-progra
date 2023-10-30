@@ -3,12 +3,8 @@ package org.ucom.services;
 import java.util.List;
 
 import org.jboss.logging.Logger;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

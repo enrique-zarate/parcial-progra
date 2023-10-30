@@ -23,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jhony
+ * @author Enrique
  */
 @Entity
 @Table(name = "venta_detalle")

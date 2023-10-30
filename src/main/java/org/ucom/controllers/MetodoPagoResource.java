@@ -10,7 +10,6 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.ResponseBuilder;
 import org.ucom.config.Globales;
 import org.ucom.entities.MetodoPago;
 import org.ucom.entities.params.ObtenerDatosError;

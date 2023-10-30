@@ -3,8 +3,6 @@ package org.ucom.entities.dto;
 import java.util.Date;
 import java.util.List;
 
-import org.ucom.entities.VentaDetalle;
-
 public class ResumenVentaDTO {
 
     public String razonSocial;
