@@ -2,7 +2,6 @@ package org.ucom.services;
 
 import java.util.List;
 
-import org.jboss.logging.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -15,14 +14,11 @@ import org.ucom.repositories.MetodoPagoRepository;
 @ApplicationScoped
 public class MetodoPagoService implements IDAO<MetodoPago, Integer> {
 
-    private static final Logger LOG = Logger.getLogger(MetodoPagoService.class);
-
     @Inject
     private MetodoPagoRepository repository;
 
     @Override
     public MetodoPago obtener(Integer param) {
-        // MetodoPago m = new MetodoPago(1, "TEST", "TEST");
         return this.repository.findById(param).orElse(null);
     }
 
@@ -38,7 +34,6 @@ public class MetodoPagoService implements IDAO<MetodoPago, Integer> {
 
     @Override
     public void eliminar(Integer param) {
-
         this.repository.deleteById(param);
     }
 
@@ -58,9 +53,7 @@ public class MetodoPagoService implements IDAO<MetodoPago, Integer> {
     public List<MetodoPago> paginado(Integer pagina, Integer cantidad) {
 
         Page<MetodoPago> lista = this.repository.findAll(
-                PageRequest.of(pagina, cantidad
-
-                ));
+                PageRequest.of(pagina, cantidad));
         return lista.getContent();
     }
 
