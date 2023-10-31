@@ -9,13 +9,21 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.ucom.config.IDAO;
+import org.ucom.customexceptions.InsufficientStockException;
 import org.ucom.entities.Cliente;
+import org.ucom.entities.MetodoPago;
 import org.ucom.entities.Venta;
+import org.ucom.entities.Producto;
 import org.ucom.entities.VentaDetalle;
 import org.ucom.entities.dto.ResumenVentaDTO;
 import org.ucom.entities.dto.VentaDetalleDTO;
 import org.ucom.repositories.VentaDetalleRepository;
 import org.ucom.repositories.VentaRepository;
+
+import org.ucom.entities.params.RegistrarVentaParam;
+import org.ucom.repositories.ClienteRepository;
+import org.ucom.repositories.MetodoPagoRepository;
+import org.ucom.repositories.ProductoRepository;
 
 @ApplicationScoped
 public class VentaService implements IDAO<Venta, Integer> {
@@ -25,6 +33,15 @@ public class VentaService implements IDAO<Venta, Integer> {
 
     @Inject
     private VentaDetalleRepository repositoryDetalle;
+
+    @Inject
+    private ClienteRepository clienteRepository;
+
+    @Inject
+    private ProductoRepository productoRepository;
+
+    @Inject
+    private MetodoPagoRepository metodoPagoRepository;
 
     @Override
     public Venta obtener(Integer param) {
@@ -36,7 +53,7 @@ public class VentaService implements IDAO<Venta, Integer> {
     @Transactional
     public Venta agregar(Venta param) {
 
-        try {
+        try { // # 2
             LOG.info(param);
 
             Venta aux = new Venta();
@@ -100,6 +117,44 @@ public class VentaService implements IDAO<Venta, Integer> {
         data.setDetalle(detalle);
 
         return data;
+    }
+
+    // implement registrarVenta
+    public Venta registrarVenta(RegistrarVentaParam param) throws InsufficientStockException {
+
+        // Crear cliente en base a su id
+        Cliente cliente = this.clienteRepository.findById(param.getClienteId()).orElse(null);
+        // Crear venta
+        Venta venta = new Venta();
+        // Setear el cliente
+        venta.setClienteId(cliente);
+        // setear el total
+        venta.setTotal(param.getTotal());
+        // setear la fecha
+        venta.setFecha(param.getFecha());
+        // Crear el metodo de pago en base a su id
+        MetodoPago mp = this.metodoPagoRepository.findById(param.getMetodoPagoId()).orElse(null);
+        // setear el metodo de pago
+        venta.setMetodoPagoId(mp);
+
+        // Obtener el producto para restar la cantidad vendida de su total
+        Producto producto = this.productoRepository.findById(param.getProductoId()).orElse(null);
+
+        // Comprobar que el stock del producto es mayor a la cantidad a vender
+        int cantidadStock = producto.getStock();
+        if (cantidadStock < param.getCantidad()) {
+            throw new InsufficientStockException("No hay stock suficiente para la venta");
+        }
+
+        producto.setStock(cantidadStock - param.getCantidad());
+
+        // Guardar venta
+        this.repository.save(venta);
+
+        // Guardar producto
+        this.productoRepository.save(producto);
+
+        return venta;
     }
 
 }

@@ -9,8 +9,11 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+
+import org.ucom.customexceptions.InsufficientStockException;
 import org.ucom.entities.Venta;
 import org.ucom.entities.dto.ResumenVentaDTO;
+import org.ucom.entities.params.RegistrarVentaParam;
 import org.ucom.services.VentaService;
 
 @Path("/venta")
@@ -30,9 +33,9 @@ public class VentaResource {
         this.service.eliminar(id);
     }
 
-    @POST
-    public Venta agregar(Venta param) {
-        return this.service.agregar(param);
+    @POST // # 1
+    public Venta agregar(RegistrarVentaParam param) throws InsufficientStockException {
+        return this.service.registrarVenta(param);
     }
 
     @PUT
